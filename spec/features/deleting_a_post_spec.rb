@@ -10,6 +10,6 @@ feature 'Deleting a post' do
     click_link 'Delete Post'
     expect(Post.count).to eq 0
     expect(current_path).to eq posts_path
-    expect(page).to have_content('.alert.alert-success')
+    expect(page).to have_css('.alert.alert-success')
   end
 end

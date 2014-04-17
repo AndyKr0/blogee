@@ -15,8 +15,8 @@ feature 'Editing a post' do
     fill_in 'Author', with: 'Daryl Dixon'
     click_button 'Save'
 
-    post = post.reload
-    
+    post.reload
+
     expect(current_path).to eq post_path(post)
     expect(post.title).to eq 'Zombie Ipsum!!!'
     expect(post.content).to eq 'Zombies reversus ab inferno, nam malum cerebro.'
@@ -34,6 +34,6 @@ feature 'Editing a post' do
     click_button 'Save'
 
     expect(current_path).to eq edit_post_path(post)
-    expect(page).to have_content('.alert.alert-error')
+    expect(page).to have_css('.alert.alert-error')
   end
 end
