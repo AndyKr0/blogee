@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Editing a post' do
   # uncomment this line when running this spec
-  # let!(:post) { create(:post) }
+  let!(:post) { create(:post) }
 
   scenario 'with valid attributes' do
     pending 'Please complete viewing_a_post_spec.rb first'
