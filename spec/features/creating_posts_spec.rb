@@ -25,7 +25,7 @@ feature 'Creating posts' do
   end
 
   scenario 'with invalid attributes' do
-    pending "Please Finish: Creating posts with valid attributes before starting"
+    #pending "Please Finish: Creating posts with valid attributes before starting"
     # visit the posts path in the browser
     visit posts_path
     # find a link titled New Post and click it
