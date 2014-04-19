@@ -1,12 +1,11 @@
 class PostsController < ApplicationController
 
-  before_action :find_post, except: [:index, :new, :create
-                                    ]
+  before_action :find_post, except: [:index, :new, :create]
   def index
     @posts = Post.all
   end
 
-  def newit 
+  def new 
     @post = Post.new
   end
 
@@ -14,7 +13,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
 
-      redirect_to post_path(@post)
+      redirect_to [@post, @comment]
     else
       flash[:error] = "Failed to create post."
       redirect_to new_post_path
