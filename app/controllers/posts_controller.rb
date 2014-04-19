@@ -1,57 +1,47 @@
 class PostsController < ApplicationController
-  
+
+  before_action :find_post, except: [:index, :new, :create
+                                    ]
   def index
     @posts = Post.all
   end
 
-  def new
+  def newit 
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash[:notice] = "Post created"
+
       redirect_to post_path(@post)
     else
-      flash[:alert] = "Post has not been created."
+      flash[:error] = "Failed to create post."
       redirect_to new_post_path
     end
   end
- 
-  def show
-    @post = Post.find(params[:id])
-  end
-  
-  def index
-    @posts = Post.all
-  end
-  
-  def edit
-    @post = Post.find(params[:id])
-  end
-  
+
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to post_path(@post)
     else
-      flash[:alert] = "Post not updated."
-      redirect_to edit_post_path
+      flash[:error] = "Failed to update post."
+      redirect_to edit_post_path(@post)
     end
   end
-  
+
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
-    
-    flash[:success] = "Post has been deleted."
-    
-    redirect_to @post
+    flash[:success] = "Post deleted."
+    redirect_to posts_path
   end
-   
-  private 
-   
+
+  private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
   def post_params
     params.require(:post).permit(:title, :content, :author)
   end

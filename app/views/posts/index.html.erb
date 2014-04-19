@@ -1,8 +1,20 @@
-<%= link_to "New Post", new_post_path %>
-<%= link_to "My Posts", posts_path %>
-<h2>Posts</h2>
-<ul>
-  <% @posts.each do |post| %>
-  <li><%= link_to post.title, post %></li>
-  <% end %>
-</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "New Post", new_post_path %>
+  </div>
+</div>
+<%= @posts.each do |post| %>
+  <div class="row">
+    <div class="col-md-12">
+      <h1><%= link_to post.title, post %></h1>
+      <small><%= post.author %></small>
+      <small><%= post.created_at.to_s(:short) %></small>
+      <div class="row">
+        <div class="col-md-12">
+          <p><%= post.content %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
