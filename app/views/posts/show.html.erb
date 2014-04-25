@@ -2,9 +2,8 @@
   <div class="col-md-12">
     <div id="title">
       <h1><%= @post.title %></h1>
-      
-      
     </div>
+    
     <div id="author">
       <p>By: <%= @post.author %></p>
       <p><%= @post.created_at.to_s(:short) %></p>
@@ -12,8 +11,28 @@
     <div id="content">
       <p><%= @post.content %></p>
     </div>
+    
+    <div id="controls">
     <%= link_to "Edit Post", edit_post_path(@post) %>
     <%= link_to "Delete Post", @post, method: :delete %>
     <%= link_to "Add Comment", new_post_comment_path(@post) %>
-  </div>
+    </div>
+    
+     <div id="comments">
+     <ul>
+      
+       <% @post.comments.each do |comment| %>
+       <li>
+         <%= link_to comment.content, [@post, comment] %>
+         - <%= comment.author %>
+       </li>
+    
+       
+       
+       <% end %>
+     </ul>
+    </div>
+
+    
+    </div>
 </div>

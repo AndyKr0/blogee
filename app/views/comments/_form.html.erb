@@ -1,5 +1,17 @@
 <%= form_for [@post, @comment] do |f| %>
  
+  <% if @comment.errors.any? %>
+  <div id="error_explanation">
+    <h4><%= pluralize(@comment.errors.count, "error") %>
+      prohibited this comment from being saved:</h4>
+    <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+     <% end %>
+    </ul>
+  </div>
+  <% end %>
+
 <div class="form-group">
   <%= f.label :content %>
   <%= f.text_area :content, rows: 10, class: "form-control" %>
@@ -8,5 +20,5 @@
   <%= f.label :author %>
   <%= f.text_field :author, class: "form-control" %>
 </div>
-<%= f.submit "Save", class: "btn btn-default" %>
+<%= f.submit "Add Comment", class: "btn btn-default" %>
 <% end %>

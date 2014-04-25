@@ -1,0 +1,9 @@
+<div id="comments">
+     <ul>
+      <% @post.comments.each do |comment| %>
+       <li>
+         #<%= comment.id %> - <%= link_to comment.content, [@post, comment] %>
+       </li>
+       <% end %>
+     </ul>
+    </div>

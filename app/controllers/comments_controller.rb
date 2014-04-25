@@ -1,24 +1,38 @@
 class CommentsController < ApplicationController
 
-  def set_post
-    @comment = @post.commments.find(params[:id])
+  before_action :set_post
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+   
+  def index
+    @comment = Comment.all
   end
-  
+    
   def new
-    @comment = Comment.new
-    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new
+    #@post = Post.find(params[:post_id])
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @post.comments.build(comment_params)
+    
     if @comment.save
-      redirect_to [@post, @comment]
+      flash[:notice] = "Comment has been saved."
+      redirect_to @post
     else
+      flash[:alert] = "Comment has not been saved."
       render "new"
     end
   end
   
 private
+   def set_post
+    @post = Post.find(params[:post_id])
+  end
+ 
+  def set_comment
+    @comment = @post.comments.find(params[:id])
+  end
+  
   def comment_params
     params.require(:comment).permit(:author, :content)
   end

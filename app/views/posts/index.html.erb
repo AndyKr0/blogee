@@ -6,7 +6,7 @@
 <%= @posts.each do |post| %>
   <div class="row">
     <div class="col-md-12">
-      <h1><%= link_to post.title, post %></h1>
+      <h1><%= post.id %> - <%= link_to post.title, post %></h1>
       <small><%= post.author %></small>
       <small><%= post.created_at.to_s(:short) %></small>
       <div class="row">
