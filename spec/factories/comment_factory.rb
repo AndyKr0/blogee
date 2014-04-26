@@ -1,6 +1,10 @@
 FactoryGirl.define do
+  sequence :content do |n|
+    "Comment #{n}, now with padding."
+  end
+
   factory :comment do
-    content "This is a valid comment, right?"
-    author  "Karl The Great"
+    content 
+    author  "Fred"
   end
 end
