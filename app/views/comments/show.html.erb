@@ -1,12 +1,14 @@
 <div class="row">
   <div class="col-md-12">
-  
+      
+    <div id="comment">
+      <p><%= @comment.content %></p>
+    </div>
     <div id="author">
       <p>By: <%= @comment.author %></p>
       <p><%= @comment.created_at.to_s(:short) %></p>
     </div>
-    <div id="content">
-      <p><%= @comment.content %></p>
+    <div>
+    <%= link_to "Edit Comment", [:edit, @post, @comment] %>
     </div>
-  </div>
 </div>

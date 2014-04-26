@@ -20,16 +20,12 @@
     
      <div id="comments">
      <ul>
-      
        <% @post.comments.each do |comment| %>
        <li>
          <%= link_to comment.content, [@post, comment] %>
-         - <%= comment.author %>
+         - <%= link_to comment.author, [@post, comment] %>
        </li>
-    
-       
-       
-       <% end %>
+      <% end %>
      </ul>
     </div>
 

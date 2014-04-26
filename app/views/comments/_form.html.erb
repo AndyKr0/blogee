@@ -20,5 +20,9 @@
   <%= f.label :author %>
   <%= f.text_field :author, class: "form-control" %>
 </div>
-<%= f.submit "Add Comment", class: "btn btn-default" %>
+<% if @comment.content.nil? %>
+    <%= f.submit "Add Comment", class: "btn btn-default" %>
+  <% else %>
+    <%= f.submit "Update Comment", class: "btn btn-default" %>
+  <% end %>
 <% end %>
