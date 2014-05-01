@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 feature 'Creating posts' do
+  before do
+    post = FactoryGirl.create(:post)   
+    user = FactoryGirl.create(:user)
+  
+    visit '/'
+    visit posts_path
+    click_link "New Post"
+    message = "You need to sign in before continuing."
+    expect(page).to have_content(message)
+  
+    fill_in "Name", with: user.name
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+  
+
+  end
+  
   scenario 'with valid attributes' do
     # visit the posts path in the browser
     visit posts_path
@@ -14,14 +31,18 @@ feature 'Creating posts' do
     fill_in 'Author', with: 'Randy Savage'
     # find the button called Save and click it
     click_button 'Save'
-    # Assert that there is now 1 post stored in the database
-    expect(Post.count).to eq 1
+    # Assert that there is now 2 posts stored in the database (the first is from the the "before" action)
+    expect(Post.count).to eq 2
     # load the last post from the database for assertions
     post = Post.last
     # assert the browsers current path to be the given path
     expect(current_path).to eq post_path(post)
     # assert that the posts title is correct
     expect(post.title).to eq 'My First Post'
+    
+    within "#author" do
+      expect(page).to have_content("Created by sample@example.com")
+    end
   end
 
   scenario 'with invalid attributes' do
