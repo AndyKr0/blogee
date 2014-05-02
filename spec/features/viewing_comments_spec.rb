@@ -2,6 +2,10 @@ require 'spec_helper'
 
 feature "Viewing comments" do
   before do
+    user = FactoryGirl.create(:user)
+    
+    sign_in_as!(user)
+   
     # setup everything you need - in this case, probably a good idea to set up
     # two Posts, each with 1 Comment
     post_1 = FactoryGirl.create(:post, title: "Chilling Out", content: "A relaxing day at the beach.", author: "Karl")
@@ -10,6 +14,10 @@ feature "Viewing comments" do
     post_2 = FactoryGirl.create(:post, title: "Moving On", content: "Caught our flight to New Jersey", author: "Karl")
     FactoryGirl.create(:comment, post: post_2, content: "Good luck on your journey.", author: "James Bond")
   
+     post_1.update(user: user)
+     post_2.update(user: user)
+
+    
     visit '/'
   end
 
@@ -24,6 +32,8 @@ feature "Viewing comments" do
     click_link "Looks like a fun trip, man."
     within("#comment") do
       expect(page).to have_content("Looks like a fun trip, man.")
+    end
+    within("#author") do  
       expect(page).to have_content("Michael")
     end
     # assert that you'll find the comment (author and content) associated with post to which you navigated

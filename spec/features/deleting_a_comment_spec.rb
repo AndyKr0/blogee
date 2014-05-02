@@ -2,14 +2,23 @@ require 'spec_helper'
 
 feature 'Deleting a comment' do
   #set up a post with two comments
+  let(:user) { FactoryGirl.create(:user) }
   let!(:post) { FactoryGirl.create(:post) }
   let!(:comment1) { FactoryGirl.create(:comment, post: post) }
   let!(:comment2) { FactoryGirl.create(:comment, post: post) }
 
   before do
+    sign_in_as!(user)
+    post.update(user: user)
+    
+    visit post_path(post)
+    click_link "Add Comment"
+  
+    
+    
     visit '/'
     click_link post.title
-end
+  end
   
   
   scenario do

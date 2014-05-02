@@ -2,10 +2,16 @@ require 'spec_helper'
 
 feature 'Editing a post' do
 
-  let!(:post) { create(:post) }
   let!(:user) { create(:user) }
+  let!(:post) { create(:post) }
+
+  
+  
   before do
+    
+    sign_in_as!(user)
     post.update(user: user)
+
   end
   
 
