@@ -5,8 +5,10 @@
     </div>
     
     <div id="author">
-      <p>By: <%= @post.author %></p>
+      <p>Created by <%= @post.user.email %></p>
+      , <%= @post.user.name %></p>
       <p><%= @post.created_at.to_s(:short) %></p>
+      
     </div>
     <div id="content">
       <p><%= @post.content %></p>

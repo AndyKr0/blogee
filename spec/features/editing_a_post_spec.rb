@@ -3,6 +3,11 @@ require 'spec_helper'
 feature 'Editing a post' do
 
   let!(:post) { create(:post) }
+  let!(:user) { create(:user) }
+  before do
+    post.update(user: user)
+  end
+  
 
   scenario 'with valid attributes' do
     visit post_path(post)

@@ -2,7 +2,13 @@ require 'spec_helper'
 
 feature 'Viewing a post spec' do
 
+  let!(:user) { create(:user) }
   let!(:post) { create(:post) }
+  before do
+    post.update(user: user)
+  end
+  
+
 
   scenario do
     visit posts_path

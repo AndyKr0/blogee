@@ -2,6 +2,9 @@ class PostsController < ApplicationController
 
   before_action :find_post, except: [:index, :new, :create]
   before_action :require_signin!, except: [:show, :index]
+  before_action :require_signin!, except: [:index, :show]
+  
+  
   
   def index
     @posts = Post.all
@@ -13,6 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
     if @post.save
 
       redirect_to [@post, @comment]
