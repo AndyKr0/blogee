@@ -58,4 +58,21 @@ feature 'Creating posts' do
     # assert that we are getting the error flash
     expect(page).to have_css('.alert.alert-error')
   end
+  
+  scenario "Creating a posts with an attachment" do
+    click_link 'New Post'
+    fill_in "Title", with: "My First Post"
+    fill_in "Content", with: "Lorem ipsom dolor sit amet."
+    fill_in "Author", with: "Randy Savage"
+    
+    attach_file "File", "spec/fixtures/test_graphic.jpg"
+    click_button "Save"
+    
+    expect(page).to have_content("My First Post")
+    
+    within("#asset") do 
+      expect(page).to have_content("test_graphic.jpg")
+    end
+  end
+  
 end

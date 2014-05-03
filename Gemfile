@@ -11,6 +11,9 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'bcrypt', '~> 3.1.7'
+gem 'carrierwave'
+
+
 
 group :development, :test do
   gem 'spring'

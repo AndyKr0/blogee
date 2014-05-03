@@ -5,11 +5,20 @@
     </div>
     
     <div id="author">
-      <p>Created by <%= @post.user.email %></p>
-      , <%= @post.user.name %></p>
+      <p>Created by <%= @post.user.email %> - <%= @post.user.name.capitalize %></p>
       <p><%= @post.created_at.to_s(:short) %></p>
-      
-    </div>
+      </div>
+    
+      <% if @post.asset.present? %>
+        <h3> Attached File </h3>
+        <div id="asset">
+          <p>
+            <%= link_to File.basename(@post.asset.path), @post.asset.url %>
+          </p>
+        </div>
+        <% end %>
+
+
     <div id="content">
       <p><%= @post.content %></p>
     </div>
@@ -24,13 +33,12 @@
      <ul>
        <% @post.comments.each do |comment| %>
        <li>
-         <%= link_to comment.content, [@post, comment] %>
+         <%= link_to comment.content, [@post, comment] %> 
          - <%= link_to comment.author, [@post, comment] %>
        </li>
       <% end %>
      </ul>
     </div>
-
     
     </div>
 </div>

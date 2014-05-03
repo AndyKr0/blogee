@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   def new
   end
   
@@ -15,6 +16,5 @@ class SessionsController < ApplicationController
       render :new
     end
   end
-  
 
 end
